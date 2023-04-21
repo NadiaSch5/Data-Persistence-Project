@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 #if UNITY_EDITOR
@@ -13,31 +12,32 @@ using UnityEditor;
 
 public class MenuUIHandler : MonoBehaviour
 {
-    public String playerName;
+    // THis is the handler of the main menu scene
+    [SerializeField] Text playerNameInput;
 
-    public void NewPlayer(string name)
+    public void SetPlayerName()
     {
-        
+        PlayerDataHandler.Instance.playerName = playerNameInput.text;
     }
-    // Start is called before the first frame update
-    void Start()
-    {
 
-
-    }
 
     // Update is called once per frame
-    public void NewStart()
+    public void StartGame()
     {
         SceneManager.LoadScene(1);
     }
 
-    public void Quit()
+    public void ExitGame()
     {
 #if UNITY_EDITOR
         EditorApplication.ExitPlaymode();
 #else
         Application.Quit();
 #endif
+    }
+
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 }
